@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoRepository;
 
 namespace DataTransform.Models
 {
-    class User
+    public class User : IEntity<string>
     {
         [BsonId]
         public string Id { get; set; }
