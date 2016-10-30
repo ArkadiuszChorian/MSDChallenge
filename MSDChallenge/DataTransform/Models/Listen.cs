@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
 using MongoRepository;
 
 namespace DataTransform.Models
 {
     public class Listen : IEntity<string>
     {
-        [BsonId]
+        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string Id { get; set; }
         public string UserId { get; set; }
         public string ArtistId { get; set; }
