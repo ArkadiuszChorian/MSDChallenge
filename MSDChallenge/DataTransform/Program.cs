@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using DataTransform.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace DataTransform
 {
@@ -28,9 +30,41 @@ namespace DataTransform
 
         static void Main(string[] args)
         {   
+            //TransformData();
+            var songs = DAL.Instance.Songs;
+            var listens = DAL.Instance.Listens;
+
+            //var query = (from song in songs.AsQueryable()
+            //             join listen in listens.AsQueryable() on song.Id equals listen.SongId into joined
+            //             group joined by song.Name into grouped
+            //             select new { Name = grouped.Key, Count = grouped.Count() }).OrderByDescending(q => q.Count);                   
+
+            //var query = from song in songs.AsQueryable()
+            //    select new {N = song.Name};
+
+            //var results = query.Take(5).ToList();
+
+            //foreach (var result in results)
+            //{
+            //    Console.WriteLine(result.N);
+            //}
+
+            //var results = query.Take(5).ToList();
+
+            //foreach (var result in results)
+            //{
+            //    Console.WriteLine(result.Name + " " + result.Count);
+            //}
+
+            Console.WriteLine("Done");
+            Console.ReadKey();
+        }
+
+        private static void TransformData()
+        {
             Stoper.Start();
 
-            LoadUniqueTracksInfoAndInsertInDb();  
+            LoadUniqueTracksInfoAndInsertInDb();
 
             Stoper.Stop();
             ProgramElapsedSeconds += Stoper.Elapsed.Seconds;
@@ -42,10 +76,7 @@ namespace DataTransform
             Stoper.Stop();
             ProgramElapsedSeconds += Stoper.Elapsed.Seconds;
             Stoper.Reset();
-
-            Console.WriteLine("Done");
-            Console.ReadKey();
-        }        
+        }
 
         private static void LoadUniqueTracksInfoAndInsertInDb()
         {          
