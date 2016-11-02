@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace DataTransform.Models
 {
-    public class Listen
+    public class FullListen
     {
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string Id { get; set; }
@@ -13,5 +13,7 @@ namespace DataTransform.Models
         public int Day { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
+        public string SongName { get; set; }
+        public string ArtistName { get; set; }
     }
 }
